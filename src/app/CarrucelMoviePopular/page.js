@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React, { useState, useEffect } from 'react';
+import { useRouter } from "next/navigation";
 
 export default function CarrucelMoviePopular() {
     const settings = {
@@ -14,6 +15,7 @@ export default function CarrucelMoviePopular() {
     };
 
     const [moviesPopular, setMoviesPopular] = useState([]);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchMoviesPopular = async () => {
@@ -33,13 +35,17 @@ export default function CarrucelMoviePopular() {
         fetchMoviesPopular();
     }, []);
 
+    const handleMoviePopularClick = (movieID) => {
+        router.push(`/movie/${movieID}`);
+    };
+
     return (
         <div className="bg-gray-900 min-h-screen flex flex-col items-center py-8">
             <h2 className="text-white text-3xl font-bold mb-8">Películas Populares</h2>
             <div className="w-full max-w-5xl px-4">
                 <Slider {...settings}>
                     {moviesPopular.map((movie) => (
-                        <div key={movie.id} className="px-2">
+                        <div key={movie.id} className="px-2" onClick={() => handleMoviePopularClick(movie.id)}>
                             <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:scale-105 transform transition duration-300 ease-in-out">
                                 <img
                                     className="w-full h-80 object-cover"

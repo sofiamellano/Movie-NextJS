@@ -1,16 +1,16 @@
-import CarrucelMovies from "./CarrucelMovies/page";
-import CarrucelMoviesPopular from "./CarrucelPopular/page";
-import CarrucelMovieTopRated from "./CarrucelToprated/page";
+import CarrucelMoviesUpcoming from "./CarrucelMoviesUpcoming/page";
+import CarrucelMoviesPopular from "./CarrucelMoviePopular/page";
+import CarrucelSeriesPopular from "./CarrucelSeriesPopular/page";
 
 export default function Home() {
   
   return (
     <div>
       <section>
-        <CarrucelMovies />
+        <CarrucelMoviesUpcoming />
       </section>
         <CarrucelMoviesPopular />
-        <CarrucelMovieTopRated />
+        <CarrucelSeriesPopular />
     </div>
   )
 }

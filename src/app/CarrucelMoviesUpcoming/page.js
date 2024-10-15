@@ -3,8 +3,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React, { useState, useEffect } from 'react';
+import { useRouter } from "next/navigation";
 
-export default function CarrucelMovies() {
+export default function CarrucelMoviesUpcoming() {
     // Configuración del slider
 const settings = {
     dots: false,
@@ -15,6 +16,7 @@ const settings = {
 };
 
 const [movies, setMovies] = useState([]);
+const router = useRouter();
 
 useEffect(() => {
     const fetchMovies = async () => {
@@ -26,7 +28,7 @@ useEffect(() => {
         },
         };
 
-            const response = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=es-MX&page=1', options);
+            const response = await fetch('https://api.themoviedb.org/3/movie/upcoming?language=es-MX&page=1', options);
             const { results } = await response.json();
             setMovies(results);
         };
@@ -34,13 +36,17 @@ useEffect(() => {
         fetchMovies();
     }, []);
 
+    const handleMovieClick = (movieID) => {
+        router.push(`/movie/${movieID}`);
+    };
+
     return (
         <div className="bg-gray-900 min-h-screen flex flex-col items-center py-8">
-        <h2 className="text-white text-3xl font-bold mb-8">Películas en Cartelera</h2>
+        <h2 className="text-white text-3xl font-bold mb-8">Proximos Estrenos</h2>
         <div className="w-full max-w-5xl px-4">
             <Slider {...settings}>
             {movies.map((movie) => (
-                <div key={movie.id} className="px-2">
+                <div key={movie.id} className="px-2" onClick={() => handleMovieClick(movie.id)} >
                 <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:scale-105 transform transition duration-300 ease-in-out">
                     <img
                     className="w-full h-80 object-cover"
