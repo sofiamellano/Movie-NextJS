@@ -10,8 +10,8 @@ export default function CarrucelMoviePopular() {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 5,
+        slidesToShow: 4,
+        slidesToScroll: 4,
     };
 
     const [moviesPopular, setMoviesPopular] = useState([]);

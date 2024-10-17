@@ -10,8 +10,8 @@ export default function CarrucelSeriesPopular() {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 5,
-        slidesToScroll: 5,
+        slidesToShow: 4,
+        slidesToScroll: 4,
     };
 
     const [seriesPopular, setSeriesPopular] = useState([]);

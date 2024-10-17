@@ -4,8 +4,6 @@ import { useParams } from "next/navigation";
 
 export default function movieDetalles() {
     const { movieID } = useParams();
-
-
     const [movieDetails, setMovieDetails] = useState(null);
     const [actors, setActors] = useState([]);
 
@@ -33,7 +31,6 @@ export default function movieDetalles() {
                 Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ZjEzMDU1N2Y0N2VlZTEwYWUyMTI5Y2UwOTk2NTU2YyIsIm5iZiI6MTcyNDk3NTIyMy40MzQzODEsInN1YiI6IjY2ZDEwNzUzMTMyMzFhNjU4MjAxOWFjMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4ILyxow2tgTqjEpdJDjvrmvlGyXQmFX-fP8f00Mo_dY', 
             },
         };
-
         const response = await fetch(`https://api.themoviedb.org/3/movie/${movieID}/credits`, options);
         const data = await response.json();
         setActors(data.cast);
@@ -43,10 +40,12 @@ export default function movieDetalles() {
     fetchActors();
     }
 }, [movieID]);
+
     if (!movieDetails) {
-        return <div className="text-white">Cargando datos...</div>; 
+        return <div className="text-white">Cargando datos...</div>;
     }
 
+    
     return (
         <div className="bg-gray-900 min-h-screen flex flex-col items-center py-8">
             <h1 className="text-white text-3xl font-bold mb-8">{movieDetails.title}</h1>
@@ -88,3 +87,4 @@ export default function movieDetalles() {
         </div>
     );
 }
+

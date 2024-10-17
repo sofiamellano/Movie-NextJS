@@ -86,11 +86,11 @@ export default function Movie() {
         slidesToScroll: 1,
     };
 
-    const [movieTopRated, setMovieTopRated] = useState([]);
+    const [movieNow, setMovieNow] = useState([]);
     const [selectedMovieId, setSelectedMovieId] = useState(null);
 
     useEffect(() => {
-        const fetchMovieTopRated = async () => {
+        const fetchMovieNow = async () => {
             const options = {
                 method: 'GET',
                 headers: {
@@ -101,10 +101,10 @@ export default function Movie() {
 
             const response = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=es-MX&page=1', options);
             const { results } = await response.json();
-            setMovieTopRated(results);
+            setMovieNow(results);
         };
 
-        fetchMovieTopRated();
+        fetchMovieNow();
     }, []);
 
     const handleAlternativeClick = (movieID) => {
@@ -116,7 +116,7 @@ export default function Movie() {
             <h2 className="text-white text-3xl font-bold mb-8">Peliculas en Cartelera</h2>
             <div className="w-full max-w-5xl px-4">  
                 <Slider {...settings}>
-                    {movieTopRated.map((movie) => (
+                    {movieNow.map((movie) => (
                         <div key={movie.id} className="px-2" onClick={() => handleAlternativeClick(movie.id)}>
                             <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:scale-105 transform transition duration-300 ease-in-out">
                                 <img
