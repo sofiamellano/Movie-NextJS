@@ -33,7 +33,6 @@ export default function SeriesProvider({seriesId}) {
                     });
                 }
             }
-
             setSeriesProvider(AllProviders);
         };
 

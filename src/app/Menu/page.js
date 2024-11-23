@@ -15,6 +15,9 @@ export default function Menu() {
                 <a href="/series" className="text-white text-lg hover:text-gray-300 transition-colors duration-200">
                 Series </a>
             </li>
+            <li>
+                <a href='/search' className="text-white text-lg hover:text-gray-300 transition-colors duration-200">Buscar</a>
+            </li>
             </ul>
         </nav>
         );

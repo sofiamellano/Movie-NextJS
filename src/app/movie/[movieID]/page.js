@@ -1,11 +1,13 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useParams } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 export default function movieDetalles() {
     const { movieID } = useParams();
     const [movieDetails, setMovieDetails] = useState(null);
     const [actors, setActors] = useState([]);
+    const router = useRouter();
 
     useEffect(() => {
         if (movieID) {
@@ -45,6 +47,8 @@ export default function movieDetalles() {
         return <div className="text-white">Cargando datos...</div>;
     }
 
+    const handleActorClick = (castID) => {
+        router.push(`/movie/${movieID}/Cast/${castID}`);}
     
     return (
         <div className="bg-gray-900 min-h-screen flex flex-col items-center py-8">
@@ -69,7 +73,8 @@ export default function movieDetalles() {
                     <h2 className="text-white text-xl font-semibold">Actores</h2>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                         {actors.map((actor) => (
-                            <div key={actor.cast_id} className="bg-gray-800 rounded-lg shadow-lg overflow-hidden p-2">
+                            <div key={actor.cast_id} className="bg-gray-800 rounded-lg shadow-lg overflow-hidden p-2" onClick={() => handleActorClick(actor.id)} 
+                            >
                                 <img
                                     className="w-full h-48 object-cover"
                                     src={actor.profile_path ? `https://image.tmdb.org/t/p/w500${actor.profile_path}` : '/fallback-image.jpg'}
@@ -87,4 +92,3 @@ export default function movieDetalles() {
         </div>
     );
 }
-
