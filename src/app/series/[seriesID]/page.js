@@ -1,9 +1,10 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 export default function seriesDetails() {
     const { seriesID } = useParams();
+    const router = useRouter();
 
     const [seriesDetails, setSeriesDetails] = useState(null);
     const [seriesActors, setSeriesactors] = useState([]);
@@ -46,6 +47,10 @@ export default function seriesDetails() {
     if (!seriesDetails) {
         return <div className="text-white">Cargando datos...</div>; 
     }
+
+    const handleActorSeriesClick = (castserieID) => {
+        router.push(`/series/${seriesID}/cast/${castserieID}`);}
+    
     
     return (
         <div className="bg-gray-900 min-h-screen flex flex-col items-center py-8">
@@ -70,7 +75,8 @@ export default function seriesDetails() {
                     <h2 className="text-white text-xl font-semibold">Actores</h2>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                         {seriesActors.map((actor) => (
-                            <div key={actor.cast_id} className="bg-gray-800 rounded-lg shadow-lg overflow-hidden p-2">
+                            <div key={actor.cast_id} className="bg-gray-800 rounded-lg shadow-lg overflow-hidden p-2"
+                            onClick={() => handleActorSeriesClick(actor.id)}>
                                 <img
                                     className="w-full h-48 object-cover"
                                     src={actor.profile_path ? `https://image.tmdb.org/t/p/w500${actor.profile_path}` : '/fallback-image.jpg'}
